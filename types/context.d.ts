@@ -9,20 +9,22 @@ type ContextType = {
 
 type QrcodeType = {
     link: string;
-    fore: string;
-    back: string;
+    fgColor: string;
+    bgColor: string;
     qrcode: {
         value: string;
         includeMargin: boolean;
         size: number;
         level: string;
-        imageSettings: {
-            src: any;
-            x: undefined;
-            y: undefined;
-            height: number;
-            width: number;
-            excavate: boolean;
-        };
+        imageSettings: ImageSettings;
     };
+}
+
+type ImageSettings = {
+    src: any;
+    x: undefined;
+    y: undefined;
+    height: number;
+    width: number;
+    excavate: boolean;
 }

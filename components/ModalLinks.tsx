@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View, Modal, Pressable } from "react-native";
-import React, { useState } from "react";
+import { StyleSheet, Text, View, Modal } from "react-native";
+import React from "react";
 import Networks from "./subcomponents/Networks";
 import { networks, supports, others, colors } from "../constants";
 import { Link } from "expo-router";
+import ButtonModal from "./ButtonModal";
 
 export default function ModalLinks({showModal, setter} : ModalLinksProps) {
   
@@ -19,12 +20,16 @@ export default function ModalLinks({showModal, setter} : ModalLinksProps) {
           <View style={styles.modalView}>
 
             <View style={styles.header}>
-              <Pressable
-                style={styles.headerButtonClose}
-                onPress={() => setter(!showModal)}
+              <ButtonModal
+                styles={{
+                  styleContainer: styles.headerButtonClose,
+                  styleButton: styles.buttonClose
+                }}
+                setter={setter}
+                data={showModal}
               >
                 <Text style={styles.headerTextButtonClose}>X</Text>
-              </Pressable>
+              </ButtonModal>
               <Text style={styles.headerTitle}>Networks</Text>
             </View>
 
@@ -99,6 +104,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  buttonClose: {},
   headerTextButtonClose: {
     fontWeight: "bold",
     fontSize: 20,

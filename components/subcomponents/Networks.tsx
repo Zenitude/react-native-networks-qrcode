@@ -1,7 +1,6 @@
 import { StyleSheet, View, Image, Text } from "react-native";
 import React from "react";
 import { Link } from "expo-router";
-import { colors } from "@/constants";
 
 export default function Networks({icons} : NetworksProps) {
   return (

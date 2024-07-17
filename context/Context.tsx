@@ -6,10 +6,10 @@ export const Context = createContext<ContextType | null>(null);
 export default function ContextProvider({children}: ContextProps) {
     const [ datas, setDatas ] = useState({
         link: "",
-        fore: colors.black,
-        back: colors.white,
+        fgColor: colors.black,
+        bgColor: colors.white,
         qrcode: {
-            value: "http://example.com",
+            value: "",
             includeMargin: true,
             size: 250,
             level: "M",

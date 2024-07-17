@@ -1,20 +1,16 @@
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, ScrollView, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import React, { useState, useContext } from "react";
 import { colors, icons } from "@/constants";
 import { Context } from "@/context/Context";
 import ModalLinks from "@/components/ModalLinks";
-import SwitchEdit from "@/components/SwitchEdit";
-import Field from "@/components/subcomponents/Field";
-import SelectField from "@/components/subcomponents/SelectField";
+import Form from "@/components/Form";
+import ButtonModal from "@/components/ButtonModal";
+import Qrcode from "@/components/Qrcode";
 
 export default function Index() {
   const { datas, setDatas } = useContext(Context)!;
   const [ showModal, setShowModal ] = useState(false);
-  const [ editLink, setEditLink ] = useState(false);
-  const [ editForeColor, setEditForeColor ] = useState(false);
-  const [ editBackColor, setEditBackColor ] = useState(false);
-  const [ editPatch, setEditPatch ] = useState(false);
   const optionsSelect = [{title: "M"}, {title: "H"}];
 
   return (
@@ -24,61 +20,31 @@ export default function Index() {
 
         <ModalLinks showModal={showModal} setter={setShowModal}/>
 
-        <View style={styles.containerButtonOpenModal}>
-          <TouchableOpacity
-            style={styles.buttonOpenModal}
-            onPress={() => setShowModal(!showModal)}
-            activeOpacity={0.7}
-          >
-            <Image 
-              source={icons.infos}
-              resizeMode="contain"
-              style={styles.buttonOpenModalIcon}
-            />
-          </TouchableOpacity>
-        </View>
+        <ButtonModal 
+          styles={{
+            container: styles.containerButtonOpenModal, 
+            button: styles.buttonOpenModal
+          }} 
+          setter={setShowModal} 
+          data={showModal}
+        >
+          <Image 
+            source={icons.infos}
+            resizeMode="contain"
+            style={styles.buttonOpenModalIcon}
+          />
+        </ButtonModal>
 
-        <View style={styles.containerForm}>
+        <Form 
+          styles={stylesForm}
+          datas={datas}
+          setterDatas={setDatas}
+          options={optionsSelect}
+        />
 
-          <SwitchEdit edit={editLink} setEdit={setEditLink} text={"Link"}>
-            <Field 
-              type={"default"}
-              value={datas.qrcode.value}
-              setValue={(text: string) => setDatas(prev => {
-                const previous = {...prev};
-                previous.qrcode.value = text;
-                return previous;
-              })}
-              placeholder={"Insert your link"}
-            />
-          </SwitchEdit>
-
-          <SwitchEdit edit={editForeColor} setEdit={setEditForeColor} text={"Foreground Color"}>
-            <Field 
-              type={"fore"}
-              value={datas.fore}
-            />
-          </SwitchEdit>          
-
-          <SwitchEdit edit={editBackColor} setEdit={setEditBackColor} text={"Background Color"}>
-            <Field 
-              type={"back"}
-              value={datas.back}
-            />
-          </SwitchEdit> 
-
-          <SwitchEdit edit={editPatch} setEdit={setEditPatch} text={"QRCode Patch"}>
-            <SelectField 
-              data={optionsSelect}
-              setter={setDatas}
-            />
-          </SwitchEdit> 
-
-        </View>
-
-        <View style={styles.containerQrcode}>
-
-        </View>
+        <Qrcode 
+          datas={datas}
+        />
 
       </ScrollView>
 
@@ -122,13 +88,17 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%"
   },
+  
+  containerQrcode: {
+
+  },
+})
+
+const stylesForm = StyleSheet.create({
   containerForm: {
     borderBottomColor: colors.black,
     borderBottomWidth: 1,
     paddingBottom: 15,
     gap: 20
-  },
-  containerQrcode: {
-
   },
 })

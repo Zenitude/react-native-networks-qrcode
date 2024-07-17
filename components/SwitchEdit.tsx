@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { colors, icons } from "@/constants";
+import ButtonImage from "./ButtonImage";
 
 type SwitchEditProps = {
     edit: boolean;
@@ -12,23 +13,21 @@ type SwitchEditProps = {
 export default function SwitchEdit({edit, setEdit, text, children}: SwitchEditProps) {
   return (
     <View style={styles.containerSwitch}>
-        {
-            !edit
-            ? (<View style={styles.container}><Text style={styles.default}>{text}</Text></View>)
-            : (<View style={styles.container}>{children}</View>)
-        }
-            <View style={styles.containerIcon}>
-              <TouchableOpacity
-                onPress={() => setEdit(!edit)}
-              >
-                <Image 
-                  source={edit ? icons.cancelEdit : icons.edit}
-                  resizeMode="contain"
-                  style={styles.icon}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
+      {
+          !edit
+          ? (<View style={styles.container}><Text style={styles.default}>{text}</Text></View>)
+          : (<View style={styles.container}>{children}</View>)
+      }
+      <ButtonImage 
+        styles={{
+          container: styles.containerIcon,
+          button: styles.button,
+          icon: styles.icon
+        }}
+        src={edit ? icons.cancelEdit : icons.edit}
+        action={() => setEdit(!edit)}
+      />
+    </View>
   )
 }
 
@@ -42,7 +41,8 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     container: {
-        flex: 1
+        flex: 1,
+        flexDirection: "row"
     },
     default: {
       fontSize: 16,
@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 10,
         borderBottomRightRadius: 10,
     },
+    button: {},
     icon: {
         width: 35,
         height: 35,

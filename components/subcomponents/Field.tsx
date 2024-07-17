@@ -1,57 +1,60 @@
-import { StyleSheet, Text, View, TextInput, KeyboardTypeOptions, Modal, TouchableOpacity, Button } from "react-native";
+import { StyleSheet, Text, View, TextInput, KeyboardTypeOptions, Modal, TouchableOpacity } from "react-native";
 import React, { useState, useContext } from "react";
-import ColorPicker, { Panel1, OpacitySlider, HueSlider, returnedResults } from 'reanimated-color-picker';
+import ColorPicker, { Panel1, OpacitySlider, HueSlider, returnedResults } from "reanimated-color-picker";
 import { Context } from "@/context/Context";
 import { colors } from "@/constants";
+import SelectField from "./SelectField";
+import ButtonModal from "../ButtonModal";
 
-type FieldProps = {
-  type: KeyboardTypeOptions | string;
-  value: string;
-  setValue?: (text:string) => void;
-  placeholder?: string;
-}
-
-export default function Field({type, value, setValue, placeholder}: FieldProps) {
-  const { setDatas } = useContext(Context)!;
+export default function Field({type, value, setValue, placeholder, options}: FieldProps) {
+  const { datas, setDatas } = useContext(Context)!;
   const [ showModal, setShowModal ] = useState(false);
 
-  const changeText = (text: string) => {
-    console.log(text);
-  }
-
   if(type === "select") {
-    return (<View><Text>Select</Text></View>)
+    return (<SelectField 
+      data={options!}
+      setter={setDatas}
+    />)
   } else if(type === "fore" || type === "back") {
     return (
       <>
-        <View style={styles.containerColorPicker}>
-          <Button title='Color Picker' onPress={() => setShowModal(true)} />
-        </View>
-        <Modal visible={showModal} animationType='slide' >
-          <ColorPicker style={stylesPreview} value={value} onComplete={(colors: returnedResults) => {
-              setDatas(prev => {
-                const previous = {...prev};
-                if(type === "fore") {
-                  previous.fore = colors.rgba
-                } else if(type === "back") {
-                  previous.back = colors.rgba
-                }
-                return previous;
-              })
-              console.log(colors)
-          }}>
-            <Text style={styles.title}>Panel</Text>
-            <Panel1 style={styles.preview} />
-            <Text style={styles.title}>Hue</Text>
-            <HueSlider style={styles.picker} />
-            <Text style={styles.title}>Opacity</Text>
-            <OpacitySlider style={styles.picker} />
-            <View style={styles.containerButton}>
-              <TouchableOpacity onPress={() => setShowModal(!showModal)} style={styles.button}>
-                <Text style={styles.buttonText}>Confirm</Text>
-              </TouchableOpacity>
+        <ButtonModal
+          styles={{ container: styles.containerColorPicker, button: styles.buttonPicker }}
+          setter={setShowModal}
+          data={showModal}
+        >
+          <Text style={styles.textButtonPicker}>Change color</Text>
+        </ButtonModal>
+        
+        <View style={type === "fore" ? {backgroundColor: datas.fgColor, flex: 1} : {backgroundColor: datas.bgColor, flex: 1 }}></View>
+        <Modal visible={showModal} animationType='slide' style={styles.modal}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalView}>
+              <ColorPicker style={stylesPreview} value={value} onComplete={(colors: returnedResults) => {
+                  setDatas(prev => {
+                    const previous = {...prev};
+                    if(type === "fore") {
+                      previous.fgColor = colors.hex
+                    } else if(type === "back") {
+                      previous.bgColor = colors.hex
+                    }
+                    return previous;
+                  })
+              }}>
+                <Text style={styles.title}>Panel</Text>
+                <Panel1 style={styles.preview} />
+                <Text style={styles.title}>Hue</Text>
+                <HueSlider style={styles.picker} />
+                <Text style={styles.title}>Opacity</Text>
+                <OpacitySlider style={styles.picker} />
+                <View style={styles.containerButton}>
+                  <TouchableOpacity onPress={() => setShowModal(!showModal)} style={styles.button}>
+                    <Text style={styles.buttonText}>Confirm</Text>
+                  </TouchableOpacity>
+                </View>
+              </ColorPicker>
             </View>
-          </ColorPicker>
+          </View>          
         </Modal>
       </>
     )
@@ -84,15 +87,40 @@ const styles = StyleSheet.create({
   containerColorPicker: {
     backgroundColor: colors.white,
     flexDirection: "row",
-    flex: 1,
+    width: 80,
+    height: 48,
+    justifyContent: "center",
+    alignItems: "center",
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
     overflow: "hidden",
+    borderColor: colors.blue,
+    borderWidth: 1
   },
-  colorPicker: {
-    width: "100%",
-    height: 45,
-    borderRadius: 10,
+  modal: {
+    width: "80%",
+    minWidth: 260,
+    maxWidth: 350,
+    backgroundColor: colors.primary,
+  },
+  modalContent: {
+    flex: 1,
+    justifyContent: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 10,
+    backgroundColor: colors.white,
+    borderRadius: 20,
+    padding: 25,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
   title: {
     fontSize: 18,
@@ -134,6 +162,18 @@ const styles = StyleSheet.create({
   },
   input: {
     paddingLeft: 10,
+  },
+  buttonPicker: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: colors.blue,
+    justifyContent: "center"
+  },
+  textButtonPicker: {
+    color: colors.white,
+    textAlign: "center",
+    fontWeight: "bold",
+    textTransform: "uppercase"
   }
 })
 
