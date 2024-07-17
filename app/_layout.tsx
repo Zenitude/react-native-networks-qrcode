@@ -1,12 +1,15 @@
 import { StyleSheet } from "react-native";
 import { Stack } from "expo-router";
 import React from "react";
+import ContextProvider from "../context/Context";
 
 export default function RootLayout() {
   return (
-    <Stack>
-      <Stack.Screen name="index" options={{ headerShown: false}}/>
-    </Stack>
+    <ContextProvider>
+      <Stack>
+        <Stack.Screen name="index" options={{ headerShown: false}} />
+      </Stack>
+    </ContextProvider>
   )
 }
 

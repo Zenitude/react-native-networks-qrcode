@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Modal, Pressable } from "react-native";
 import React, { useState } from "react";
-import Networks from "./Networks";
+import Networks from "./subcomponents/Networks";
 import { networks, supports, others, colors } from "../constants";
 import { Link } from "expo-router";
 
@@ -19,13 +19,13 @@ export default function ModalLinks({showModal, setter} : ModalLinksProps) {
           <View style={styles.modalView}>
 
             <View style={styles.header}>
-              <Text style={styles.headerTitle}>Networks</Text>
               <Pressable
                 style={styles.headerButtonClose}
                 onPress={() => setter(!showModal)}
               >
                 <Text style={styles.headerTextButtonClose}>X</Text>
               </Pressable>
+              <Text style={styles.headerTitle}>Networks</Text>
             </View>
 
             <View style={styles.main}>
@@ -38,8 +38,10 @@ export default function ModalLinks({showModal, setter} : ModalLinksProps) {
             </View>
 
             <View style={styles.footer}>
-              <Text style={styles.footerInfos}>Images appearing according to the link</Text>
-              <Text>For another network to be considered <Link href="/contact">contact us</Link></Text>
+              <Text style={styles.footerInfos}>
+                This image appears when a network is not included among those above.
+                For another network to be added <Link href="/contact" style={styles.contactLink}>contact us</Link>
+              </Text>
             </View>
 
           </View>
@@ -51,20 +53,21 @@ export default function ModalLinks({showModal, setter} : ModalLinksProps) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.primary
+    width: "80%",
+    minWidth: 260,
+    maxWidth: 350,
+    backgroundColor: colors.primary,
   },
   content: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
     marginTop: 22,
   },
   modalView: {
-    margin: 20,
-    backgroundColor: 'white',
+    margin: 10,
+    backgroundColor: colors.white,
     borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
+    padding: 25,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -75,31 +78,48 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   header: {
+    width: "100%",
     height: 50,
     justifyContent: "center",
-    alignItems: "center"
+    marginBottom: 10,
   },
   headerTitle: {
     fontSize: 20,
     fontWeight: "bold",
+    textAlign: "center",
   },
   headerButtonClose: {
     width: 30,
     height: 30,
     borderRadius: 5,
-    color: colors.third,
+    borderColor: colors.black,
+    borderWidth: 1,
+    color: colors.white,
+    alignSelf: "flex-end",
+    justifyContent: "center",
+    alignItems: "center",
   },
-  headerTextButtonClose: {},
-  main: {},
+  headerTextButtonClose: {
+    fontWeight: "bold",
+    fontSize: 20,
+  },
+  main: {
+    width: "100%",
+  },
   subtitle: {
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   footer: {
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   footerInfos: {
     fontSize: 14,
-    textAlign: "center"
   },
+  contactLink: {
+    textDecorationStyle: "dashed",
+    textDecorationLine: "underline",
+    textDecorationColor: colors.blue,
+    color: colors.blue
+  }
 })

@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-export default function Field() {
+export default function contact() {
   return (
     <View>
-      <Text>Field</Text>
+      <Text>contact</Text>
     </View>
   )
 }
