@@ -11,7 +11,12 @@ import Qrcode from "@/components/Qrcode";
 export default function Index() {
   const { datas, setDatas } = useContext(Context)!;
   const [ showModal, setShowModal ] = useState(false);
-  const optionsSelect = [{title: "M"}, {title: "H"}];
+  const optionsSelect = [
+    {title: "Without", value: 0}, 
+    {title: "Small", value: 5}, 
+    {title: "Medium", value: 10}, 
+    {title: "High", value: 20} 
+  ];
 
   return (
     <SafeAreaView style={styles.area}>

@@ -5,22 +5,14 @@ export const Context = createContext<ContextType | null>(null);
 
 export default function ContextProvider({children}: ContextProps) {
     const [ datas, setDatas ] = useState({
-        link: "",
         fgColor: colors.black,
         bgColor: colors.white,
         qrcode: {
+            defaultValue: "https://www.google.com/",
             value: "",
-            includeMargin: true,
-            size: 250,
-            level: "M",
-            imageSettings: {
-                src: icons.zen,
-                x: undefined,
-                y: undefined,
-                height: 50,
-                width: 50,
-                excavate: true
-            }
+            quietzone: 10,
+            size: 200,
+            logo: icons.zen
         } 
     });
 

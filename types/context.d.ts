@@ -8,15 +8,14 @@ type ContextType = {
 }
 
 type QrcodeType = {
-    link: string;
     fgColor: string;
     bgColor: string;
     qrcode: {
+        defaultValue: string;
         value: string;
-        includeMargin: boolean;
+        quietzone: number;
         size: number;
-        level: string;
-        imageSettings: ImageSettings;
+        logo: ImageSourcePropType;
     };
 }
 

@@ -10,10 +10,10 @@ type SelectFieldProps = {
 
 export default function SelectField({data, setter}: SelectFieldProps) {
 
-    const selectChoice = (selectedItem: {title: string}, index: number) => {
+    const selectChoice = (selectedItem: {title: string, value: number}, index: number) => {
         setter((prev) => {
             const previous = {...prev};
-            previous.qrcode.level = selectedItem.title
+            previous.qrcode.quietzone = selectedItem.value
             return previous;
         })
     }
@@ -26,7 +26,7 @@ export default function SelectField({data, setter}: SelectFieldProps) {
                 return (
                     <View style={styles.dropdownButtonStyle}>
                         <Text style={styles.dropdownButtonTxtStyle}>
-                            {(selectedItem && selectedItem.title) || 'Select patch'}
+                            {(selectedItem && selectedItem.title) || 'Select margin'}
                         </Text>
                         <Image 
                             source={isOpened ? icons.chevronUp : icons.chevronDown} 
@@ -45,7 +45,7 @@ export default function SelectField({data, setter}: SelectFieldProps) {
             }}
         showsVerticalScrollIndicator={false}
         dropdownStyle={styles.dropdownMenuStyle}
-        defaultValue={"M"}
+        defaultValue={"Medium"}
         />
     )
 }
