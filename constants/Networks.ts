@@ -12,16 +12,16 @@ import xTwitter from "../assets/images/networks/x.webp";
 import youtube from "../assets/images/networks/youtube.webp";
 
 export const networks = <NetworksType[]>[
-    {icon: facebook, link: "https://www.facebook.com/", text: "Facebook"},
-    {icon: github, link: "https://github.com/", text: "Github"},
-    {icon: instagram, link: "https://www.instagram.com/", text: "Instagram"},
-    {icon: kick, link: "https://kick.com/", text: "Kick"},
-    {icon: linkedin, link: "https://www.linkedin.com/in/", text: "Linkedin"},
-    {icon: onlyfans, link: "https://onlyfans.com/", text: "OnlyFans"},
-    {icon: pinterest, link: "https://www.pinterest.fr/", text: "Pinterest"},
-    {icon: reddit, link: "https://www.reddit.com/", text: "Reddit"},
-    {icon: tiktok, link: "https://www.tiktok.com/", text: "Tiktok"},
-    {icon: twitch, link: "https://www.twitch.tv/", text: "Twitch"},
-    {icon: youtube, link: "https://www.youtube.com/", text: "Youtube"},
-    {icon: xTwitter, link: "https://x.com/", text: "X"},
+    {icon: facebook, link: "facebook.com", text: "Facebook"},
+    {icon: github, link: "github.com", text: "Github"},
+    {icon: instagram, link: "instagram.com", text: "Instagram"},
+    {icon: kick, link: "kick.com", text: "Kick"},
+    {icon: linkedin, link: "linkedin.com", text: "Linkedin"},
+    {icon: onlyfans, link: "onlyfans.com", text: "OnlyFans"},
+    {icon: pinterest, link: "pinterest", text: "Pinterest"},
+    {icon: reddit, link: "reddit.com", text: "Reddit"},
+    {icon: tiktok, link: "tiktok.com", text: "Tiktok"},
+    {icon: twitch, link: "twitch.tv", text: "Twitch"},
+    {icon: youtube, link: "youtube.com", text: "Youtube"},
+    {icon: xTwitter, link: "x.com", text: "X"},
 ];

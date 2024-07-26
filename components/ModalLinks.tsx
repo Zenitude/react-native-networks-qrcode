@@ -1,11 +1,88 @@
 import { StyleSheet, Text, View, Modal } from "react-native";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Networks from "./subcomponents/Networks";
 import { networks, supports, others, colors } from "../constants";
 import { Link } from "expo-router";
 import ButtonModal from "./ButtonModal";
+import { Context }  from "@/context/Context";
 
 export default function ModalLinks({showModal, setter} : ModalLinksProps) {
+  const { theme } = useContext(Context)!;
+
+  const styles = StyleSheet.create({
+    container: {
+      width: "80%",
+      minWidth: 260,
+      maxWidth: 350,
+    },
+    content: {
+      flex: 1,
+      justifyContent: 'center',
+      marginTop: 22,
+    },
+    modalView: {
+      margin: 10,
+      backgroundColor: theme === 'dark' ? colors.dark.background : colors.light.background,
+      borderRadius: 20,
+      padding: 25,
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5,
+    },
+    header: {
+      width: "100%",
+      height: 50,
+      justifyContent: "center",
+      marginBottom: 10,
+    },
+    headerTitle: {
+      fontSize: 20,
+      fontWeight: "bold",
+      textAlign: "center",
+      color: theme === 'dark' ? colors.dark.text : colors.light.text,
+    },
+    headerButtonClose: {
+      width: 30,
+      height: 30,
+      borderRadius: 5,
+      borderColor: theme === 'dark' ? colors.dark.border : colors.light.border,
+      backgroundColor: theme === 'dark' ? colors.dark.background : colors.light.background,
+      borderWidth: 1,
+      alignSelf: "flex-end",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    buttonClose: {},
+    headerTextButtonClose: {
+      fontWeight: "bold",
+      fontSize: 20,
+      color: theme === 'dark' ? colors.dark.text : colors.light.text,
+    },
+    main: {
+      width: "100%",
+    },
+    subtitle: {
+      fontWeight: "bold",
+    },
+    footer: {
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    footerInfos: {
+      fontSize: 14,
+    },
+    contactLink: {
+      textDecorationStyle: "dashed",
+      textDecorationLine: "underline",
+      textDecorationColor: theme === 'dark' ? colors.dark.text : colors.light.text,
+      color: theme === 'dark' ? colors.dark.text : colors.light.text,
+    }
+  })
   
   return (
     <Modal
@@ -22,8 +99,8 @@ export default function ModalLinks({showModal, setter} : ModalLinksProps) {
             <View style={styles.header}>
               <ButtonModal
                 styles={{
-                  styleContainer: styles.headerButtonClose,
-                  styleButton: styles.buttonClose
+                  container: styles.headerButtonClose,
+                  button: styles.buttonClose
                 }}
                 setter={setter}
                 data={showModal}
@@ -56,76 +133,3 @@ export default function ModalLinks({showModal, setter} : ModalLinksProps) {
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    width: "80%",
-    minWidth: 260,
-    maxWidth: 350,
-    backgroundColor: colors.primary,
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    marginTop: 22,
-  },
-  modalView: {
-    margin: 10,
-    backgroundColor: colors.white,
-    borderRadius: 20,
-    padding: 25,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  header: {
-    width: "100%",
-    height: 50,
-    justifyContent: "center",
-    marginBottom: 10,
-  },
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  headerButtonClose: {
-    width: 30,
-    height: 30,
-    borderRadius: 5,
-    borderColor: colors.black,
-    borderWidth: 1,
-    color: colors.white,
-    alignSelf: "flex-end",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  buttonClose: {},
-  headerTextButtonClose: {
-    fontWeight: "bold",
-    fontSize: 20,
-  },
-  main: {
-    width: "100%",
-  },
-  subtitle: {
-    fontWeight: "bold",
-  },
-  footer: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  footerInfos: {
-    fontSize: 14,
-  },
-  contactLink: {
-    textDecorationStyle: "dashed",
-    textDecorationLine: "underline",
-    textDecorationColor: colors.blue,
-    color: colors.blue
-  }
-})

@@ -9,14 +9,61 @@ import ButtonModal from "@/components/ButtonModal";
 import Qrcode from "@/components/Qrcode";
 
 export default function Index() {
-  const { datas, setDatas } = useContext(Context)!;
+  const { datas, setDatas, theme } = useContext(Context)!;
   const [ showModal, setShowModal ] = useState(false);
   const optionsSelect = [
-    {title: "Without", value: 0}, 
+    {title: "Without", value: 0},
     {title: "Small", value: 5}, 
     {title: "Medium", value: 10}, 
     {title: "High", value: 20} 
   ];
+  console.log('Le theme actuel est : ', theme)
+  const styles = StyleSheet.create({
+    area: {
+      width: "100%",
+      height: "100%",
+      justifyContent: "center",
+      alignItems: "center",
+      paddingTop: 15,
+      zIndex: 1,
+      backgroundColor: theme === 'dark' ? colors.dark.background : colors.light.background,
+    },
+    scroll: {
+      width: "100%",
+      paddingHorizontal: 15
+    },
+    mainTitle: {
+      fontSize: 24,
+      fontWeight: "bold",
+      textAlign: "center"
+    },
+    containerButtonOpenModal: {
+      width: "100%",
+      height: 50,
+    },
+    buttonOpenModal: {
+      width: 40,
+      height: 40,
+      backgroundColor: theme === 'dark' ? colors.dark.background : colors.light.background,
+      borderColor: theme === 'dark' ? colors.dark.border : colors.light.border,
+      borderWidth: 2,
+      borderRadius: 75,
+      justifyContent: "center",
+      alignItems: "center",
+      padding: 5,
+    }, 
+    buttonOpenModalIcon: {
+      width: "100%",
+      height: "100%"
+    },
+  })
+  
+  const stylesForm = StyleSheet.create({
+    containerForm: {
+      paddingVertical: 15,
+      gap: 20
+    },
+  })
 
   return (
     <SafeAreaView style={styles.area}>
@@ -40,15 +87,13 @@ export default function Index() {
           />
         </ButtonModal>
 
+        <Qrcode />
+
         <Form 
           styles={stylesForm}
           datas={datas}
           setterDatas={setDatas}
           options={optionsSelect}
-        />
-
-        <Qrcode 
-          datas={datas}
         />
 
       </ScrollView>
@@ -57,53 +102,3 @@ export default function Index() {
   )
 }
 
-const styles = StyleSheet.create({
-  area: {
-    width: "100%",
-    height: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: 15,
-    zIndex: 1
-  },
-  scroll: {
-    width: "100%",
-    paddingHorizontal: 15
-  },
-  mainTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
-    textAlign: "center"
-  },
-  containerButtonOpenModal: {
-    width: "100%",
-    height: 50,
-  },
-  buttonOpenModal: {
-    width: 35,
-    height: 35,
-    borderColor: colors.black,
-    borderWidth: 2,
-    borderRadius: 75,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 5,
-  }, 
-  buttonOpenModalIcon: {
-    width: "100%",
-    height: "100%"
-  },
-  
-  containerQrcode: {
-
-  },
-})
-
-const stylesForm = StyleSheet.create({
-  containerForm: {
-    borderBottomColor: colors.black,
-    borderBottomWidth: 1,
-    paddingBottom: 15,
-    gap: 20
-  },
-})

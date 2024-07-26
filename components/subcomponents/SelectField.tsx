@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View, Image } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import SelectDropdown from "react-native-select-dropdown";
 import { colors, icons } from "@/constants";
+import { Context } from "@/context/Context";
 
 type SelectFieldProps = {
     data : {title: string}[];
@@ -9,6 +10,68 @@ type SelectFieldProps = {
 }
 
 export default function SelectField({data, setter}: SelectFieldProps) {
+    const { theme } = useContext(Context)!;
+
+    const styles = StyleSheet.create({
+        label: {
+            color: theme === 'dark' ? colors.dark.text : colors.light.text,
+            marginBottom: -15
+        },
+        dropdownButtonStyle: {
+            flex: 1,
+            height: 45,
+            backgroundColor: theme === 'dark' ? colors.dark.background : colors.light.background,
+            borderRadius: 10,
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingHorizontal: 12,
+        },
+        dropdownButtonTxtStyle: {
+            flex: 1,
+            fontSize: 18,
+            fontWeight: '500',
+            color: theme === 'dark' ? colors.dark.text : colors.light.text,
+        },
+        dropdownButtonArrowStyle: {
+            width: 25,
+            height: 25
+        },
+        dropdownButtonIconStyle: {
+            width: 25,
+            height: 25,
+            marginRight: 8,
+        },
+        dropdownMenuStyle: {
+            backgroundColor: theme === 'dark' ? colors.dark.background : colors.light.background,
+            borderRadius: 5,
+            borderWidth: 1,
+            borderColor: theme === 'dark' ? colors.dark.border : colors.light.border,
+        },
+        dropdownItemStyle: {
+            width: '100%',
+            flexDirection: 'row',
+            paddingHorizontal: 12,
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingVertical: 8,
+            borderBottomWidth: 2,
+            borderBottomColor: theme === 'dark' ? colors.dark.border : colors.light.border,
+            borderTopWidth: 2,
+            borderTopColor: theme === 'dark' ? colors.dark.border : colors.light.border,
+        },
+        dropdownItemTxtStyle: {
+            flex: 1,
+            fontSize: 18,
+            fontWeight: '500',
+            color: theme === 'dark' ? colors.dark.text : colors.light.text,
+        },
+        dropdownItemIconStyle: {
+            width: 25,
+            height: 25,
+            marginRight: 8,
+        },
+      });
 
     const selectChoice = (selectedItem: {title: string, value: number}, index: number) => {
         setter((prev) => {
@@ -50,63 +113,3 @@ export default function SelectField({data, setter}: SelectFieldProps) {
     )
 }
 
-const styles = StyleSheet.create({
-    label: {
-        color: colors.white,
-        marginBottom: -15
-    },
-    dropdownButtonStyle: {
-        flex: 1,
-        height: 45,
-        backgroundColor: colors.primary,
-        borderRadius: 10,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingHorizontal: 12,
-    },
-    dropdownButtonTxtStyle: {
-        flex: 1,
-        fontSize: 18,
-        fontWeight: '500',
-        color: colors.black,
-    },
-    dropdownButtonArrowStyle: {
-        width: 25,
-        height: 25
-    },
-    dropdownButtonIconStyle: {
-        width: 25,
-        height: 25,
-        marginRight: 8,
-    },
-    dropdownMenuStyle: {
-        backgroundColor: colors.primary,
-        borderRadius: 5,
-        borderWidth: 1,
-        borderColor: colors.black
-    },
-    dropdownItemStyle: {
-        width: '100%',
-        flexDirection: 'row',
-        paddingHorizontal: 12,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingVertical: 8,
-        borderBottomWidth: 2,
-        borderBottomColor: colors.black,
-        borderTopWidth: 2,
-        borderTopColor: colors.black
-    },
-    dropdownItemTxtStyle: {
-        flex: 1,
-        fontSize: 18,
-        fontWeight: '500',
-        color: colors.white,
-    },
-    dropdownItemIconStyle: {
-        width: 25,
-        height: 25,
-        marginRight: 8,
-    },
-  });

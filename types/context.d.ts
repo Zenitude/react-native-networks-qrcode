@@ -5,6 +5,8 @@ type ContextProps = {
 type ContextType = {
     datas: QrcodeType,
     setDatas: React.Dispatch<React.SetStateAction<QrcodeType>>,
+    theme : "light" | "dark" | null | undefined;
+    setTheme : React.Dispatch<React.SetStateAction<"light" | "dark" | null | undefined>>
 }
 
 type QrcodeType = {

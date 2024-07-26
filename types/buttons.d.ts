@@ -1,7 +1,7 @@
 type ButtonModalProps = {
     styles: {
-        styleContainer: StyleProp<any>;
-        styleButton: StyleProp<any>;
+        container: StyleProp<any>;
+        button: StyleProp<any>;
     }
     setter: React.Dispatch<React.SetStateAction<any>>
     data: any;
