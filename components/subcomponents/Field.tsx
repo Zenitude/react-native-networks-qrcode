@@ -12,47 +12,47 @@ export default function Field({type, value, setValue, placeholder, options}: Fie
 
   const styles = StyleSheet.create({
     containerColorPicker: {
-      backgroundColor: theme === 'dark' ? colors.dark.background : colors.light.background,
       flexDirection: "row",
       width: 80,
-      height: 48,
+      height: 60,
       justifyContent: "center",
       alignItems: "center",
       borderTopLeftRadius: 10,
       borderBottomLeftRadius: 10,
       overflow: "hidden",
-      borderColor: theme === 'dark' ? colors.dark.border : colors.light.border,
-      borderWidth: 1
     },
     modal: {
       width: "80%",
       minWidth: 260,
       maxWidth: 350,
-      backgroundColor: theme === 'dark' ? colors.dark.background : colors.light.background,
     },
     modalContent: {
       flex: 1,
       justifyContent: 'center',
       marginTop: 22,
+      backgroundColor: 'transparent',
     },
     modalView: {
       margin: 10,
-      backgroundColor: theme === 'dark' ? colors.dark.background : colors.light.background,
+      borderColor: theme === 'dark' ? colors.dark.borderModal : colors.light.borderModal,
+      borderWidth: 1,
+      backgroundColor: theme === 'dark' ? colors.dark.backgroundModal : colors.light.backgroundModal,
       borderRadius: 20,
       padding: 25,
-      shadowColor: '#000',
+      shadowColor: theme === 'dark' ? colors.dark.shadow : colors.light.shadow,
       shadowOffset: {
-        width: 0,
+        width: 2,
         height: 2,
       },
       shadowOpacity: 0.25,
       shadowRadius: 4,
-      elevation: 5,
+      elevation: 10,
     },
     title: {
       fontSize: 18,
       fontWeight: "bold",
-      paddingLeft: 30
+      paddingLeft: 30,
+      color: theme === "dark" ? colors.dark.text : colors.light.text,
     },
     picker: {
       width: "80%",
@@ -60,8 +60,6 @@ export default function Field({type, value, setValue, placeholder, options}: Fie
       marginVertical: 15
     },
     preview: {
-      borderColor: theme === 'dark' ? colors.dark.border : colors.light.border,
-      borderWidth: 2,
       width: "80%",
       marginHorizontal: "auto",
       marginVertical: 15
@@ -70,9 +68,9 @@ export default function Field({type, value, setValue, placeholder, options}: Fie
       marginTop: 30,
       marginLeft: 30,
       width: "80%",
-      height: 35,
+      height: 40,
       marginVertical: "auto",
-      backgroundColor: theme === 'dark' ? colors.dark.background : colors.light.background,
+      backgroundColor: theme === 'dark' ? colors.dark.backgroundButton : colors.light.backgroundButton,
       borderRadius: 15,
       justifyContent: "center",
       alignItems: "center"
@@ -85,7 +83,9 @@ export default function Field({type, value, setValue, placeholder, options}: Fie
     },
     buttonText: {
       marginVertical: "auto",
-      color: theme === 'dark' ? colors.dark.text : colors.light.text,
+      color: theme === 'dark' ? colors.dark.textModal : colors.white,
+      fontWeight: "bold",
+      fontSize: 18
     },
     input: {
       paddingLeft: 10,
@@ -93,14 +93,22 @@ export default function Field({type, value, setValue, placeholder, options}: Fie
     buttonPicker: {
       width: "100%",
       height: "100%",
-      backgroundColor: theme === 'dark' ? colors.dark.background : colors.light.background,
+      backgroundColor: theme === 'dark' ? colors.dark.backgroundButton : colors.light.backgroundButton,
       justifyContent: "center"
     },
     textButtonPicker: {
-      color: theme === 'dark' ? colors.dark.text : colors.light.text,
+      color: theme === 'dark' ? colors.dark.textModal : colors.white,
       textAlign: "center",
       fontWeight: "bold",
       textTransform: "uppercase"
+    },
+    fg: {
+      backgroundColor: datas.fgColor, 
+      flex: 1,
+    },
+    bg: {
+      backgroundColor: datas.bgColor, 
+      flex: 1,
     }
   })
   
@@ -111,7 +119,8 @@ export default function Field({type, value, setValue, placeholder, options}: Fie
       data={options!}
       setter={setDatas}
     />)
-  } else if(type === "fore" || type === "back") {
+  } 
+  else if(type === "fore" || type === "back") {
     return (
       <>
         <ButtonModal
@@ -122,8 +131,8 @@ export default function Field({type, value, setValue, placeholder, options}: Fie
           <Text style={styles.textButtonPicker}>Change color</Text>
         </ButtonModal>
         
-        <View style={type === "fore" ? {backgroundColor: datas.fgColor, flex: 1} : {backgroundColor: datas.bgColor, flex: 1 }}></View>
-        <Modal visible={showModal} animationType='slide' style={styles.modal}>
+        <View style={type === "fore" ? styles.fg : styles.bg}></View>
+        <Modal visible={showModal} animationType='slide' style={styles.modal} transparent={true}>
           <View style={styles.modalContent}>
             <View style={styles.modalView}>
               <ColorPicker style={stylesPreview} value={value} onComplete={(colors: returnedResults) => {
@@ -157,23 +166,14 @@ export default function Field({type, value, setValue, placeholder, options}: Fie
   }
   else {
     return (
-      <View>
-        {
-          type === "select"
-          ? (<Text>Select</Text>)
-          : (
-            <TextInput
-              onChangeText={setValue}
-              value={value}
-              placeholder={placeholder}
-              placeholderTextColor={colors.grey}
-              keyboardType={type as KeyboardTypeOptions}
-              style={styles.input}
-            />
-          )
-        }
-        
-      </View>
+      <TextInput
+        onChangeText={setValue}
+        value={value}
+        placeholder={placeholder}
+        placeholderTextColor={theme === 'dark' ? colors.grey : colors.black + '85'}
+        keyboardType={type as KeyboardTypeOptions}
+        style={styles.input}
+      />
     )
   }
   

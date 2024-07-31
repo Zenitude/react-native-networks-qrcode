@@ -20,7 +20,7 @@ export default function SelectField({data, setter}: SelectFieldProps) {
         dropdownButtonStyle: {
             flex: 1,
             height: 45,
-            backgroundColor: theme === 'dark' ? colors.dark.background : colors.light.background,
+            backgroundColor: theme === 'dark' ? colors.dark.backgroundField : colors.light.backgroundField,
             borderRadius: 10,
             flexDirection: 'row',
             justifyContent: 'center',
@@ -43,10 +43,10 @@ export default function SelectField({data, setter}: SelectFieldProps) {
             marginRight: 8,
         },
         dropdownMenuStyle: {
-            backgroundColor: theme === 'dark' ? colors.dark.background : colors.light.background,
+            backgroundColor: theme === 'dark' ? colors.dark.backgroundField : colors.light.backgroundField,
             borderRadius: 5,
             borderWidth: 1,
-            borderColor: theme === 'dark' ? colors.dark.border : colors.light.border,
+            borderColor: theme === 'dark' ? colors.dark.theme.secondary : colors.light.theme.secondary,
         },
         dropdownItemStyle: {
             width: '100%',
@@ -56,9 +56,9 @@ export default function SelectField({data, setter}: SelectFieldProps) {
             alignItems: 'center',
             paddingVertical: 8,
             borderBottomWidth: 2,
-            borderBottomColor: theme === 'dark' ? colors.dark.border : colors.light.border,
+            borderBottomColor: theme === 'dark' ? colors.dark.theme.primary : colors.light.theme.primary,
             borderTopWidth: 2,
-            borderTopColor: theme === 'dark' ? colors.dark.border : colors.light.border,
+            borderTopColor: theme === 'dark' ? colors.dark.theme.primary : colors.light.theme.primary,
         },
         dropdownItemTxtStyle: {
             flex: 1,
@@ -92,7 +92,7 @@ export default function SelectField({data, setter}: SelectFieldProps) {
                             {(selectedItem && selectedItem.title) || 'Select margin'}
                         </Text>
                         <Image 
-                            source={isOpened ? icons.chevronUp : icons.chevronDown} 
+                            source={isOpened ? (theme === 'dark' ? icons.chevronUp : icons.chevronUpLight) : (theme === 'dark' ? icons.chevronDown : icons.chevronDownLight)} 
                             resizeMode="contain"
                             style={styles.dropdownButtonArrowStyle} 
                         />
@@ -101,7 +101,7 @@ export default function SelectField({data, setter}: SelectFieldProps) {
             }}
             renderItem={(item, index, isSelected) => {
             return (
-                <View style={{...styles.dropdownItemStyle, ...(isSelected && {backgroundColor: colors.white})}}>
+                <View style={{...styles.dropdownItemStyle, ...(isSelected && {backgroundColor: theme === 'dark' ? colors.dark.background : colors.light.background})}}>
                 <Text style={styles.dropdownItemTxtStyle}>{item.title}</Text>
                 </View>
             );

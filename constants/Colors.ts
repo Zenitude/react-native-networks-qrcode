@@ -3,32 +3,60 @@
  * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
  */
 
-const tintColorLight = '#fff';
-const tintColorDark = '#0a7ea4';
+const red = '#FF0000';
+const blue = '#0000FF';
+const green = '#00FF00';
+const black = '#000000';
+const white = '#FFFFFF';
+const grey = "#CDCDE0";
+
+const dark = {
+  primary: '#371a30',
+  secondary: '#562a41',
+  third: '#d4962f',
+}
+
+const light = {
+  primary: '#e1e1e1',
+  secondary: '#fff',
+  third: '#566a91',
+  fourth: '#d4762f'
+}
 
 export const colors = {
+  black: black,
+  white: white,
   light: {
-    text: '#ECEDEE',
-    background: '#151718',
-    border: '',
-    tint: tintColorLight,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorLight,
+    theme: light,
+    text: light.third,
+    textModal: black,
+    border: '#00ff00',
+    borderModal: light.third,
+    borderButton: light.third,
+    borderField: 'transparent',
+    shadow: black,
+    background: light.primary,
+    backgroundModal: light.secondary,
+    backgroundButtonModal: red + '75',
+    backgroundIcon: white,
+    backgroundField: light.secondary,
+    backgroundButton: light.third,
   },
   dark: {
-    text: '#fff',
-    background: '#11181C',
-    border: '',
-    tint: tintColorDark,
-    icon: '#687076',
-    tabIconDefault: '#687076',
-    tabIconSelected: tintColorDark,
+    theme: dark,
+    text: dark.third,
+    textModal: white,
+    border: '#243642',
+    borderModal: dark.third,
+    borderButton: dark.third,
+    borderField: dark.third,
+    shadow: '#f1de53',
+    background: dark.primary,
+    backgroundModal: dark.secondary,
+    backgroundButtonModal: red,
+    backgroundIcon: white,
+    backgroundField: dark.secondary,
+    backgroundButton: dark.third,
   },
-  black: "#000000",
-  white: "#FFFFFF",
-  grey: "#CDCDE0",
-  // red: "#FF0000",
-  // green: "#00FF00",
-  // blue: "#0000FF",
+  grey: grey
 };

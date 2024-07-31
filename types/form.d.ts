@@ -12,3 +12,10 @@ type FieldProps = {
     placeholder?: string;
     options?: {title:string}[];
 }
+
+type SwitchEditProps = {
+    edit: boolean;
+    setEdit: React.Dispatch<React.SetStateAction<boolean>>;
+    text: string;
+    children: React.ReactNode;
+}

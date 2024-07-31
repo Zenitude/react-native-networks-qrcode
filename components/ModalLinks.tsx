@@ -22,10 +22,12 @@ export default function ModalLinks({showModal, setter} : ModalLinksProps) {
     },
     modalView: {
       margin: 10,
-      backgroundColor: theme === 'dark' ? colors.dark.background : colors.light.background,
+      borderColor: theme === 'dark' ? colors.dark.borderModal : colors.light.borderModal,
+      borderWidth: 1,
+      backgroundColor: theme === 'dark' ? colors.dark.backgroundModal : colors.light.backgroundModal,
       borderRadius: 20,
       padding: 25,
-      shadowColor: '#000',
+      shadowColor: theme === 'dark' ? colors.dark.shadow : colors.light.shadow,
       shadowOffset: {
         width: 0,
         height: 2,
@@ -44,14 +46,14 @@ export default function ModalLinks({showModal, setter} : ModalLinksProps) {
       fontSize: 20,
       fontWeight: "bold",
       textAlign: "center",
-      color: theme === 'dark' ? colors.dark.text : colors.light.text,
+      color: theme === 'dark' ? colors.dark.textModal : colors.light.textModal,
     },
     headerButtonClose: {
       width: 30,
       height: 30,
       borderRadius: 5,
-      borderColor: theme === 'dark' ? colors.dark.border : colors.light.border,
-      backgroundColor: theme === 'dark' ? colors.dark.background : colors.light.background,
+      borderColor: theme === 'dark' ? colors.dark.borderButton : colors.light.borderButton,
+      backgroundColor: theme === 'dark' ? colors.dark.backgroundButtonModal : colors.light.backgroundButtonModal,
       borderWidth: 1,
       alignSelf: "flex-end",
       justifyContent: "center",
@@ -61,13 +63,14 @@ export default function ModalLinks({showModal, setter} : ModalLinksProps) {
     headerTextButtonClose: {
       fontWeight: "bold",
       fontSize: 20,
-      color: theme === 'dark' ? colors.dark.text : colors.light.text,
+      color: theme === 'dark' ? colors.dark.textModal : colors.white,
     },
     main: {
       width: "100%",
     },
     subtitle: {
       fontWeight: "bold",
+      color: theme === 'dark' ? colors.dark.textModal : colors.light.textModal,
     },
     footer: {
       alignItems: "center",
@@ -75,6 +78,7 @@ export default function ModalLinks({showModal, setter} : ModalLinksProps) {
     },
     footerInfos: {
       fontSize: 14,
+      color: theme === 'dark' ? colors.dark.textModal : colors.light.textModal,
     },
     contactLink: {
       textDecorationStyle: "dashed",
@@ -123,6 +127,9 @@ export default function ModalLinks({showModal, setter} : ModalLinksProps) {
               <Text style={styles.footerInfos}>
                 This image appears when a network is not included among those above.
                 For another network to be added <Link href="/contact" style={styles.contactLink}>contact us</Link>
+              </Text>
+              <Text style={styles.footerInfos}>
+              The theme of this application is based on that of your smartphone, if your smartphone is in dark, this application will be in dark and vice versa if it is in light.
               </Text>
             </View>
 

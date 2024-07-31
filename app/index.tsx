@@ -17,7 +17,7 @@ export default function Index() {
     {title: "Medium", value: 10}, 
     {title: "High", value: 20} 
   ];
-  console.log('Le theme actuel est : ', theme)
+
   const styles = StyleSheet.create({
     area: {
       width: "100%",
@@ -44,8 +44,8 @@ export default function Index() {
     buttonOpenModal: {
       width: 40,
       height: 40,
-      backgroundColor: theme === 'dark' ? colors.dark.background : colors.light.background,
-      borderColor: theme === 'dark' ? colors.dark.border : colors.light.border,
+      backgroundColor: theme === 'dark' ? colors.dark.theme.secondary : colors.light.theme.third,
+      borderColor: theme === 'dark' ? colors.dark.theme.third : colors.light.theme.secondary,
       borderWidth: 2,
       borderRadius: 75,
       justifyContent: "center",

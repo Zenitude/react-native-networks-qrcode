@@ -4,24 +4,18 @@ import { colors, icons } from "@/constants";
 import ButtonImage from "./ButtonImage";
 import { Context } from "@/context/Context";
 
-type SwitchEditProps = {
-    edit: boolean;
-    setEdit: React.Dispatch<React.SetStateAction<boolean>>;
-    text: string;
-    children: React.ReactNode;
-}
-
 export default function SwitchEdit({edit, setEdit, text, children}: SwitchEditProps) {
   const { theme } = useContext(Context)!;
 
   const styles = StyleSheet.create({
     containerSwitch: {
       flexDirection: "row",
-      height: 50,
-      borderColor: theme === 'dark' ? colors.dark.border : colors.light.border,
+      height: 60,
+      backgroundColor: theme === "dark" ? colors.dark.backgroundField : colors.light.backgroundField,
       borderWidth: 1,
       borderRadius: 10,
-      alignItems: "center"
+      alignItems: "center",
+      overflow: 'hidden'
     },
     container: {
       flex: 1,
@@ -31,22 +25,27 @@ export default function SwitchEdit({edit, setEdit, text, children}: SwitchEditPr
       fontSize: 16,
       fontWeight: "bold",
       paddingLeft: 15,
+      color: theme === 'dark' ? colors.dark.text : colors.light.text,
     },
     containerIcon: {
-      width: 50,
-      height: 50,
-      paddingTop: 8,
-      paddingLeft: 8,
-      borderLeftColor: theme === 'dark' ? colors.dark.border : colors.light.border,
-      borderLeftWidth: 1,
-      backgroundColor: theme === 'dark' ? colors.dark.background : colors.light.background,
-      borderTopRightRadius: 10,
-      borderBottomRightRadius: 10,
+      width: 60,
+      height: 58,
+      paddingTop: 10,
+      paddingLeft: 10,
+      borderRightColor: theme === 'dark' ? colors.dark.borderField : colors.light.borderField,
+      borderBottomColor: theme === 'dark' ? colors.dark.borderField : colors.light.borderField,
+      borderTopColor: theme === 'dark' ? colors.dark.borderField : colors.light.borderField,
+      borderRightWidth: 1,
+      borderBottomWidth: 1,
+      borderTopWidth: 1,
+      backgroundColor: theme === 'dark' ? colors.dark.theme.third : colors.light.theme.third,
+      borderTopRightRadius: 9,
+      borderBottomRightRadius: 9,
     },
     button: {},
     icon: {
-      width: 35,
-      height: 35,
+      width: 40,
+      height: 40,
     }
 
   })

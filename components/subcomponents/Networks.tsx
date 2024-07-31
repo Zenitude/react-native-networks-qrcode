@@ -1,8 +1,11 @@
 import { StyleSheet, View, Image, Text } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "expo-router";
+import { colors } from "@/constants";
+import { Context } from "@/context/Context";
 
 export default function Networks({icons} : NetworksProps) {
+    const { theme } = useContext(Context)!;
 
     const styles = StyleSheet.create({
         container: {
@@ -27,17 +30,20 @@ export default function Networks({icons} : NetworksProps) {
             height: 50,
             borderRadius: 15,
             overflow: "hidden",
-            marginHorizontal: "auto"  
+            marginHorizontal: "auto",
+            backgroundColor: theme === 'dark' ? colors.dark.backgroundIcon : colors.light.backgroundIcon,
         },
         icons: {
             width: 52,
             height: 52,
             borderRadius: 10,
+            backgroundColor: theme === 'dark' ? colors.dark.backgroundIcon : colors.light.backgroundIcon,
         },
         title: {
             fontWeight: "bold",
             fontSize: 11,
-            textAlign: "center"
+            textAlign: "center",
+            color: theme === 'dark' ? colors.dark.text : colors.light.text,
         }
     })
 
