@@ -89,6 +89,12 @@ export default function Field({type, value, setValue, placeholder, options}: Fie
     },
     input: {
       paddingLeft: 10,
+      width: "100%",
+      height: "100%",
+    },
+    message: {
+      width: "100%",
+      height: "100%",
     },
     buttonPicker: {
       width: "100%",
@@ -113,6 +119,7 @@ export default function Field({type, value, setValue, placeholder, options}: Fie
   })
   
   const stylesPreview = StyleSheet.compose(styles.picker, styles.preview);
+  const stylesMessage = StyleSheet.compose(styles.input, styles.message);
 
   if(type === "select") {
     return (<SelectField 
@@ -171,8 +178,8 @@ export default function Field({type, value, setValue, placeholder, options}: Fie
         value={value}
         placeholder={placeholder}
         placeholderTextColor={theme === 'dark' ? colors.grey : colors.black + '85'}
-        keyboardType={type as KeyboardTypeOptions}
-        style={styles.input}
+        keyboardType={type === "message" ? "default" : type as KeyboardTypeOptions}
+        style={type === "message" ? stylesMessage : styles.input}
       />
     )
   }

@@ -19,3 +19,15 @@ type SwitchEditProps = {
     text: string;
     children: React.ReactNode;
 }
+
+type FormContactProps = {
+    styles : StyleProps<any>
+    datas : DatasContact;
+    setter: React.Dispatch<React.SetStateAction<DatasContact>>;
+}
+
+type DatasContact = {
+    from: string;
+    createdAt: string;
+    message: string;
+}
