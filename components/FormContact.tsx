@@ -12,7 +12,7 @@ export default function FormContact({styles, datas, setter} : FormContactProps) 
             <View style={styles.field}>
                 <Field 
                     type={'email-address'}
-                    value={''}
+                    value={datas.from}
                     setValue={(text) => setter({...datas, from: text})}
                     placeholder="Enter your email address"
                 />
@@ -22,7 +22,7 @@ export default function FormContact({styles, datas, setter} : FormContactProps) 
             <View style={stylesMessage}>
                 <Field 
                     type={'message'}
-                    value={''}
+                    value={datas.message}
                     setValue={(text) => setter({...datas, message: text})}
                     placeholder="Enter your message"
                 />

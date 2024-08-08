@@ -1,5 +1,5 @@
 import { View, Alert } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import SwitchEdit from './SwitchEdit';
 import Field from "./subcomponents/Field";
 import { networks, supports } from "@/constants";
