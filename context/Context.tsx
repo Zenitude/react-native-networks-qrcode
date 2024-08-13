@@ -5,8 +5,7 @@ import { Appearance } from "react-native";
 export const Context = createContext<ContextType | null>(null);
 
 export default function ContextProvider({children}: ContextProps) {
-    //const [ theme, setTheme ] = useState(Appearance.getColorScheme());
-    const [ theme, setTheme ] = useState<'dark'|'light'|null|undefined>('light');
+    const [ theme, setTheme ] = useState(Appearance.getColorScheme());
     const [ datas, setDatas ] = useState({
         fgColor: colors.black,
         bgColor: colors.white,

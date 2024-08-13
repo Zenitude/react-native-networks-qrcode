@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Modal } from "react-native";
+import { StyleSheet, Text, View, Modal, ScrollView } from "react-native";
 import React, { useContext, useEffect } from "react";
 import Networks from "./subcomponents/Networks";
 import { networks, supports, others, colors } from "../constants";
@@ -17,16 +17,17 @@ export default function ModalLinks({showModal, setter} : ModalLinksProps) {
     },
     content: {
       flex: 1,
-      justifyContent: 'center',
-      marginTop: 22,
+      marginTop: 10
     },
     modalView: {
-      margin: 10,
+      marginHorizontal: 10,
       borderColor: theme === 'dark' ? colors.dark.borderModal : colors.light.borderModal,
       borderWidth: 1,
       backgroundColor: theme === 'dark' ? colors.dark.backgroundModal : colors.light.backgroundModal,
       borderRadius: 20,
-      padding: 25,
+      paddingHorizontal: 25,
+      paddingTop: 25,
+      paddingBottom: 10,
       shadowColor: theme === 'dark' ? colors.dark.shadow : colors.light.shadow,
       shadowOffset: {
         width: 0,
@@ -96,7 +97,7 @@ export default function ModalLinks({showModal, setter} : ModalLinksProps) {
       onRequestClose={() => setter(!showModal) }
       style={styles.container}
     >
-        <View style={styles.content}>
+        <ScrollView style={styles.content}>
 
           <View style={styles.modalView}>
 
@@ -119,15 +120,16 @@ export default function ModalLinks({showModal, setter} : ModalLinksProps) {
               <Networks icons={networks}/>
               <Text style={styles.subtitle}>Financial supports</Text>
               <Networks icons={supports}/>
-              <Text style={styles.subtitle}>Other networks</Text>
+              <Text style={styles.subtitle}>Default</Text>
               <Networks icons={others}/>
             </View>
 
             <View style={styles.footer}>
               <Text style={styles.footerInfos}>
                 This image appears when a network is not included among those above.
-                For another network to be added <Link href="/contact" style={styles.contactLink}>contact us</Link>
+                For another network to be added contact us at :
               </Text>
+              <Link href="mailto:qrcode-generator@gmail.com" style={styles.contactLink}>qrcode-generator@gmail.com</Link>
               <Text style={styles.footerInfos}>
               The theme of this application is based on that of your smartphone, if your smartphone is in dark, this application will be in dark and vice versa if it is in light.
               </Text>
@@ -135,7 +137,7 @@ export default function ModalLinks({showModal, setter} : ModalLinksProps) {
 
           </View>
 
-        </View>
+        </ScrollView>
       </Modal>
   )
 }

@@ -19,7 +19,7 @@ export default function Form({styles, datas, setterDatas, options }: FormType) {
                 value={datas.qrcode.value}
                 setValue={(text: string) => setterDatas(prev => {
                     const previous = {...prev};
-                    const regex = new RegExp(/^[https://]/);
+                    // const regex = new RegExp(/^[https://]/);
                     const mixNetworks = networks.concat(supports);
 
                     mixNetworks.forEach(network => {
@@ -29,10 +29,10 @@ export default function Form({styles, datas, setterDatas, options }: FormType) {
                       }
                     })
 
-                    if(!regex.test(previous.qrcode.value)) { 
-                      Alert.alert("This field can only contain url links.");
-                      previous.qrcode.value = "";
-                    }
+                    // if(!regex.test(previous.qrcode.value)) { 
+                    //   Alert.alert("This field can only contain url links.");
+                    //   previous.qrcode.value = "";
+                    // }
                     
                     return previous;
                 })}
